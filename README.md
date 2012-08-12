@@ -36,11 +36,12 @@ Ranger was tested in latest Chrome and IE 8 (_should_ works in 6 and 7!). In the
 
 ## Known issues
 
-There is a multiline bug in Opera. It will be fixed in the nearest future too.
+There is a multiline bug in Opera and IE. It will be fixed in the nearest future too.
 
 ## Future plans
 
 1. Fix multiline bugs in Opera;
+2. Fix multiline bugs in IE;
 3. Test in many versions of various browsers (FF 3.6+, Opera 9.5+, IE6+, Safari 3+, Chrome);
 4. Make jQuery version;
 5. Make and publish test page;
