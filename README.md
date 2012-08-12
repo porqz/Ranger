@@ -8,23 +8,23 @@ Ranger initializes once, when you call its method first time.
 
 Ranger extends inputs and textareas with these methods:
 
-- **getCursorPosition(inversed)** — returns position of cursor. If inversed argument is _true_ — returns position from end of text.
-- **setCursorPosition(position)** — sets position of cursor. If position argument is _negative_, cursor position will be calculated _from end of text_. Returns input.
-- **insertAtCursor(text)** — inserts text at cursor position. Returns input.
-- **wrapCursor(leftPart, rightPart)** — wraps cursor with _left_ and _right_ parts. Returns input.
-- **select(from, to)** — selects text in input. _No arguments_ — selects all, _two arguments_ — selects range. Supports _negative_ arguments, for example: input.select(−1, −20) — will select from _end of text_ to 20-th symbol till end. Returns input.
-- **deselect()** — to do :).
-- **getSelectedText()** — returns selected text.
-- **replaceSelectedText(text)** — replaces selected text with _text_ argument. Returns input.
-- **wrapSelectedText(leftPart, rightPart)** — wraps selected text with _left_ and _right_ parts. Returns input.
+- __getCursorPosition(inversed)__ — returns position of cursor. __Inversed__ argument is optional, if is __true__ — method returns position from end of text.
+- __setCursorPosition(position)__ — sets position of cursor. If position argument is _negative_, cursor position will be calculated from end of text. Returns input.
+- __insertAtCursor(text)__ — inserts text at cursor position. Returns input.
+- __wrapCursor(leftPart, rightPart)__ — wraps cursor with two parts of text. Returns input.
+- __select(from, to)__ — selects text in input. __No arguments__ — selects all, __two arguments__ — selects range. Supports _negative_ arguments, for example: input.select(−1, −20) — will select from end of text to 20-th symbol before end. Returns input.
+- __deselect()__ — deselects text. __Not implemented now (to do!).__
+- __getSelectedText()__ — returns selected text.
+- __replaceSelectedText(text)__ — replaces selected text with __text__ argument. Returns input.
+- __wrapSelectedText(leftPart, rightPart)__ — wraps selected text with two parts of text. Returns input.
 
 ## Supported browsers
 
-Ranger was tested in latest Chrome and IE 8 (should works in 6 and 7!). In the nearest future it will be tested in older IEs and other browsers.
+Ranger was tested in latest Chrome and IE 8 (_should_ works in 6 and 7!). In the nearest future it will be tested in older IEs and other browsers.
 
 ## Known issues
 
-I’m not sure, but there is a multiline bug in old Opera versions. It will be fixed in the nearest future too.
+I’m _not_ sure, but there is a multiline bug in old Opera versions. It will be fixed in the nearest future too.
 
 ## Plans
 
