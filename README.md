@@ -9,8 +9,8 @@ Ranger initializes once, when you call its method first time.
 Ranger extends inputs and textareas with these methods:
 
 - __getCursorPosition(inversed)__ — returns position of cursor. __Inversed__ argument is optional, if is __true__ — method returns position from end of text.
-- __setCursorPosition(position)__ — sets position of cursor. If position argument is _negative_, cursor position will be calculated from end of text. Returns input.
-- __insertAtCursor(text)__ — inserts text at cursor position. Returns input.
+- __setCursorPosition(position)__ — sets position of cursor. If __position__ argument is _negative_, cursor position will be calculated from end of text. Returns input.
+- __insertAtCursor(text)__ — inserts __text__ at cursor position. Returns input.
 - __wrapCursor(leftPart, rightPart)__ — wraps cursor with two parts of text. Returns input.
 - __select(from, to)__ — selects text in input. __No arguments__ — selects all, __two arguments__ — selects range. Supports _negative_ arguments, for example: input.select(−1, −20) — will select from end of text to 20-th symbol before end. Returns input.
 - __deselect()__ — deselects text. __Not implemented now (to do!).__
@@ -31,4 +31,4 @@ I’m _not_ sure, but there is a multiline bug in old Opera versions. It will be
 1. Make and publish test page;
 2. Test in many versions of various browsers (FF 3.6+, Opera 9.5+, IE6+, Safari 3+, Chrome);
 3. Write .deselect() method implementation;
-4. Make jQuery version;
+4. Make jQuery version.
