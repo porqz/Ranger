@@ -174,7 +174,7 @@ var Ranger = (function() {
 
 		Ranger.prototype.select = function(startPosition, endPosition) {
 			var range = this.input.createTextRange(),
-				valueLength = this.input.value.length;
+				valueLength = this.input.value.length - this.input.value.countOf("\n");
 
 			// Reset cursor to zero position
 			range.expand("textedit");
@@ -279,13 +279,14 @@ var Ranger = (function() {
 
 	Ranger.prototype.replaceSelectedText = function(text) {
 		var inputValue = this.input.value,
-			cursorPosition = this.getCursorPosition();
+			cursorPosition = this.__getCursorPosition();
+			realCursorPosition = this.getCursorPosition();
 
 		this.input.value = 
 			inputValue.substr(0, cursorPosition) + text + 
 			inputValue.substr(cursorPosition + this.getSelectedText().length, inputValue.length);
 
-		this.setCursorPosition(cursorPosition + text.length);
+		this.setCursorPosition(realCursorPosition + text.length);
 	};
 
 
