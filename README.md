@@ -1,7 +1,5 @@
 # Ranger
 
-## What is it
-
 Ranger is _cross-browser_ input and textarea objects extension, which provides methods for _easy_ working with cursor (caret) and selections.
 
 Ranger initializes once, when you call its method first time.
