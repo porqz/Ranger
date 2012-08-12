@@ -229,7 +229,7 @@ var Ranger = (function() {
 	}
 	// The end of the magic
 
-	// Common parts
+	// Common part
 
 	Ranger.prototype.insertAtCursor = function(text) {
 		var cursorPosition = this.getCursorPosition(),
@@ -276,7 +276,7 @@ var Ranger = (function() {
 // Extension part
 
 (function(Ranger) {
-	// Some useful extensions
+	// Simple extending method
 	Object.prototype.extendWith = Object.prototype.extendWith || function(object) {
 		for (var propertyName in object) {
 			if (object.hasOwnProperty(propertyName)) {
