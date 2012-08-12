@@ -8,7 +8,8 @@ Ranger initializes once, when you call its method first time.
 
 Just download it and include in your page:
 
-`<script src="./js/ranger.js" type="text/javascript" charset="utf-8"></script>`
+```html
+<script src="./js/ranger.js" type="text/javascript" charset="utf-8"></script>```
 
 After that all your inputs and textareas will have new methods. Really simple, isn’t it?
 
