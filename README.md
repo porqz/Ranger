@@ -1,8 +1,18 @@
 # Ranger
 
+## What is it
+
 Ranger is _cross-browser_ input and textarea objects extension, which provides methods for _easy_ working with cursor (caret) and selections.
 
 Ranger initializes once, when you call its method first time.
+
+## Usage
+
+Just download it and include in your page:
+
+<script src="./js/ranger.js" type="text/javascript" charset="utf-8"></script>
+
+After that all your inputs and textareas will have new methods. It is really simple, isn’t it?
 
 ## Methods
 
@@ -28,7 +38,7 @@ Ranger was tested in latest Chrome and IE 8 (_should_ works in 6 and 7!). In the
 
 I’m _not_ sure, but there is a multiline bug in old Opera versions. It will be fixed in the nearest future too.
 
-## Plans
+## Future plans
 
 1. Make and publish test page;
 2. Test in many versions of various browsers (FF 3.6+, Opera 9.5+, IE6+, Safari 3+, Chrome);
