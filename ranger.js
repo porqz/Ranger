@@ -153,7 +153,6 @@ var Ranger = (function() {
 			return position;
 		};
 
-
 		Ranger.prototype.setCursorPosition = function(position) {
 			var range = this.input.createTextRange();
 
@@ -170,6 +169,18 @@ var Ranger = (function() {
 			
 			range.select();
 			this.rangeSaver.saveRange();
+		};
+
+		Ranger.prototype.insertAtCursor = function(text) {
+			var cursorPosition = this.getCursorPosition(),
+				__cursorPosition = this.__getCursorPosition(),
+					inputValue = this.input.value;
+
+			this.input.value = 
+				inputValue.substr(0, __cursorPosition) + text + 
+				inputValue.substr(__cursorPosition, inputValue.length);
+
+			this.setCursorPosition(cursorPosition + text.length);
 		};
 
 		Ranger.prototype.select = function(startPosition, endPosition) {
@@ -202,11 +213,23 @@ var Ranger = (function() {
 			if (selection.type.toLowerCase() == "text")
 				return selectionRange.text;
 		};
+
+		Ranger.prototype.replaceSelectedText = function(text) {
+			var inputValue = this.input.value,
+				__cursorPosition = this.__getCursorPosition();
+				cursorPosition = this.getCursorPosition();
+
+			this.input.value = 
+				inputValue.substr(0, __cursorPosition) + text + 
+				inputValue.substr(__cursorPosition + this.getSelectedText().length, inputValue.length);
+
+			this.setCursorPosition(cursorPosition + text.length);
+		};
 	}
 	else {
 		// Here is the same part, but for modern browsers
 		if ("getSelection" in window) {
-			Ranger.prototype.getCursorPosition = Ranger.prototype.__getCursorPosition = function(inversed) {
+			Ranger.prototype.getCursorPosition = function(inversed) {
 				var inversed = inversed || false;
 
 				if (this.input.selectionStart || this.input.selectionStart == "0") {
@@ -243,6 +266,28 @@ var Ranger = (function() {
 			};
 		}
 
+		Ranger.prototype.insertAtCursor = function(text) {
+			var cursorPosition = this.getCursorPosition(),
+					inputValue = this.input.value;
+
+			this.input.value = 
+				inputValue.substr(0, cursorPosition) + text + 
+				inputValue.substr(cursorPosition, inputValue.length);
+
+			this.setCursorPosition(cursorPosition + text.length);
+		};
+
+		Ranger.prototype.replaceSelectedText = function(text) {
+			var inputValue = this.input.value,
+				cursorPosition = this.getCursorPosition();
+
+			this.input.value = 
+				inputValue.substr(0, cursorPosition) + text + 
+				inputValue.substr(cursorPosition + this.getSelectedText().length, inputValue.length);
+
+			this.setCursorPosition(cursorPosition + text.length);
+		};
+
 		if ("getSelection" in window) {
 			Ranger.prototype.getSelectedText = function() {
 				return this.input.value.substring(this.input.selectionStart, this.input.selectionEnd);
@@ -252,18 +297,6 @@ var Ranger = (function() {
 	// The end of the magic
 
 	// Common part
-
-	Ranger.prototype.insertAtCursor = function(text) {
-		var cursorPosition = this.__getCursorPosition(),
-				inputValue = this.input.value;
-
-		this.input.value = 
-			inputValue.substr(0, cursorPosition) + text + 
-			inputValue.substr(cursorPosition, inputValue.length);
-
-		this.setCursorPosition(cursorPosition + text.length);
-	};
-
 
 	Ranger.prototype.wrapCursor = function(leftPart, rightPart) {
 		var cursorPosition = this.getCursorPosition();
@@ -275,20 +308,6 @@ var Ranger = (function() {
 	Ranger.prototype.deselect = function() {
 		this.setCursorPosition(this.getCursorPosition());
 	};
-
-
-	Ranger.prototype.replaceSelectedText = function(text) {
-		var inputValue = this.input.value,
-			cursorPosition = this.__getCursorPosition();
-			realCursorPosition = this.getCursorPosition();
-
-		this.input.value = 
-			inputValue.substr(0, cursorPosition) + text + 
-			inputValue.substr(cursorPosition + this.getSelectedText().length, inputValue.length);
-
-		this.setCursorPosition(realCursorPosition + text.length);
-	};
-
 
 	Ranger.prototype.wrapSelectedText = function(leftPart, rightPart) {
 		this.replaceSelectedText(leftPart + this.getSelectedText() + rightPart)
