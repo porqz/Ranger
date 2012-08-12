@@ -43,4 +43,5 @@ I’m _not_ sure, but there is a multiline bug in old Opera versions. It will be
 1. Make and publish test page;
 2. Test in many versions of various browsers (FF 3.6+, Opera 9.5+, IE6+, Safari 3+, Chrome);
 3. Write .deselect() method implementation;
-4. Make jQuery version.
+4. Make jQuery version;
+5. Make Russian version of the README.
