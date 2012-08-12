@@ -124,6 +124,35 @@ var Ranger = (function() {
 			return position;
 		};
 
+		Ranger.prototype.__getCursorPosition = function(inversed) {
+			var inversed = inversed || false,
+				position = null,
+				
+				inputValue = this.input.value,
+				savedRange = this.rangeSaver.getRange(),
+				rangeText = savedRange.text,
+				textBookmark = "~#@"; // There is no another way to get cursor position, believe me.
+
+			savedRange.text = textBookmark;
+
+			var textBookmarkPosition = this.input.value.indexOf(textBookmark);
+
+			if (inversed) {
+				position = - inputValue.length + textBookmarkPosition - 1;
+			}
+			else {
+				position = textBookmarkPosition;
+			}
+
+			savedRange.moveStart("character", - textBookmark.length);
+			savedRange.select();
+			savedRange.text = rangeText;
+			savedRange.moveStart("character", - rangeText.length);
+			savedRange.select();
+
+			return position;
+		};
+
 
 		Ranger.prototype.setCursorPosition = function(position) {
 			var range = this.input.createTextRange();
@@ -177,7 +206,7 @@ var Ranger = (function() {
 	else {
 		// Here is the same part, but for modern browsers
 		if ("getSelection" in window) {
-			Ranger.prototype.getCursorPosition = function(inversed) {
+			Ranger.prototype.getCursorPosition = Ranger.prototype.__getCursorPosition = function(inversed) {
 				var inversed = inversed || false;
 
 				if (this.input.selectionStart || this.input.selectionStart == "0") {
@@ -225,7 +254,7 @@ var Ranger = (function() {
 	// Common part
 
 	Ranger.prototype.insertAtCursor = function(text) {
-		var cursorPosition = this.getCursorPosition(),
+		var cursorPosition = this.__getCursorPosition(),
 				inputValue = this.input.value;
 
 		this.input.value = 
