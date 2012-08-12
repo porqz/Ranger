@@ -25,16 +25,6 @@ var Ranger = (function() {
 	//
 	// If we use IE... Would be ready for troubles.
 	if ("createTextRange" in experimentalInput) {
-		// Some syntactic sugar
-		String.prototype.reverse = String.prototype.reverse || function() {
-			var reversed = "";
-
-			for (var i = this.length - 1; i >= 0; i--) {
-				reversed = reversed.concat(this.charAt(i));
-			}
-
-			return reversed;
-		};
 
 		// Let me introduce you the RangeSaver object,
 		// which helps us to save and restore cursor position
@@ -114,7 +104,7 @@ var Ranger = (function() {
 			savedRange.text = textBookmark;
 
 			if (inversed) {
-				position = -this.input.value.reverse().indexOf(textBookmark.reverse()) - 1;
+				position = - inputValue.length + this.input.value.indexOf(textBookmark) - 1;
 			}
 			else {
 				position = this.input.value.indexOf(textBookmark);
