@@ -18,6 +18,8 @@ Ranger extends inputs and textareas with these methods:
 - __replaceSelectedText(text)__ — replaces selected text with __text__ argument. Returns input.
 - __wrapSelectedText(leftPart, rightPart)__ — wraps selected text with two parts of text. Returns input.
 
+As you can see, many methods return input instance, so you can use chainable calls!
+
 ## Supported browsers
 
 Ranger was tested in latest Chrome and IE 8 (_should_ works in 6 and 7!). In the nearest future it will be tested in older IEs and other browsers.
