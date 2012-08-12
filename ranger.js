@@ -296,6 +296,7 @@ var Ranger = (function() {
 		//
 		// (Number) → this
 		setCursorPosition: function(position) {
+			this.focus();
 			this.ranger().setCursorPosition(position);
 			return this;
 		},
