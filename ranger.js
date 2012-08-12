@@ -297,7 +297,7 @@ var Ranger = (function() {
 			return this.rangerInstance;
 		},
 
-		// (void) → Number
+		// ([Boolean]) → Number
 		getCursorPosition: function(inversed) {
 			return this.ranger().getCursorPosition(inversed || false);
 		},
@@ -320,7 +320,7 @@ var Ranger = (function() {
 			return this;
 		},
 
-		// (Number, Number) → this
+		// ([Number, Number]) → this
 		select: function(from, to) {
 			// Select all if no argument comes
 			var from = (typeof from != "undefined" ? from : 0),
