@@ -1,6 +1,9 @@
 // Ranger is object-wrapper around Range, Selection, TextRange
 
 var Ranger = (function() {
+	String.prototype.countOf = String.prototype.countOf || function(text) {
+		return this.split(text).length - 1;
+	};
 
 	// Well, here it is.
 	var Ranger = function Ranger(input) {
@@ -103,11 +106,13 @@ var Ranger = (function() {
 
 			savedRange.text = textBookmark;
 
+			var textBookmarkPosition = this.input.value.indexOf(textBookmark);
+
 			if (inversed) {
-				position = - inputValue.length + this.input.value.indexOf(textBookmark) - 1;
+				position = - inputValue.length + textBookmarkPosition - 1 + inputValue.substring(textBookmarkPosition, inputValue.length - 1).countOf("\n");
 			}
 			else {
-				position = this.input.value.indexOf(textBookmark);
+				position = textBookmarkPosition - this.input.value.substring(0, textBookmarkPosition).countOf("\n");
 			}
 
 			savedRange.moveStart("character", - textBookmark.length);
