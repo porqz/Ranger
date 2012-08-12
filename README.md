@@ -25,3 +25,9 @@ Ranger was tested in latest Chrome and IE 8 (should works in 6 and 7!). In the n
 ## Known issues
 
 I’m not sure, but there is a multiline bug in old Opera versions. It will be fixed in the nearest future too.
+
+## Plans
+
+1. Test in many versions of various browsers (FF 3.6+, Opera 9.5+, IE6+, Safari 3+, Chrome);
+2. Write .deselect() method implementation;
+3. Make jQuery version;
