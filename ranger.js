@@ -326,6 +326,7 @@ var Ranger = (function() {
 			var from = (typeof from != "undefined" ? from : 0),
 				to = (typeof to != "undefined" ? to : -1);
 
+			this.focus();
 			this.ranger().select(from, to);
 			return this;
 		},
