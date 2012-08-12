@@ -361,7 +361,4 @@ var Ranger = (function() {
 	Object.prototype.extendWith.apply(HTMLTextAreaElement.prototype, [Rangeble]);
 	Object.prototype.extendWith.apply(HTMLInputElement.prototype, [Rangeble]);
 
-	//HTMLTextAreaElement.prototype.extendWith(Rangeble);
-	//HTMLInputElement.prototype.extendWith(Rangeble);
-
 })(Ranger);
