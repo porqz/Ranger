@@ -193,8 +193,6 @@ var Ranger = (function() {
 				}
 
 				this.input.setSelectionRange(position, position);
-
-				return this;
 			};
 
 			Ranger.prototype.select = function(from, to) {
@@ -238,6 +236,10 @@ var Ranger = (function() {
 
 		this.insertAtCursor(leftPart + rightPart);
 		this.setCursorPosition(cursorPosition + leftPart.length)
+	};
+
+	Ranger.prototype.deselect = function() {
+		this.setCursorPosition(this.getCursorPosition());
 	};
 
 
@@ -323,7 +325,7 @@ var Ranger = (function() {
 		//
 		// (void) → this
 		deselect: function() {
-			//this.ranger().deselect();
+			this.ranger().deselect();
 			return this;
 		},
 
