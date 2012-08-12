@@ -8,7 +8,7 @@ Ranger initializes once, when you call its method first time.
 
 Ranger extends inputs and textareas with these methods:
 
-- **getCursorPosition(inversed)** — returns position of cursor. If inversed argument is _true_ — returns position from end of text.
+- **getCursorPosition(inversed)** — returns position of cursor. If inversed argument is _true_ — returns position from end of text.
 - **setCursorPosition(position)** — sets position of cursor. If position argument is _negative_, cursor position will be calculated _from end of text_. Returns input.
 - **insertAtCursor(text)** — inserts text at cursor position. Returns input.
 - **wrapCursor(leftPart, rightPart)** — wraps cursor with _left_ and _right_ parts. Returns input.
