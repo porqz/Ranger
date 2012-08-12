@@ -40,7 +40,7 @@ There is a multiline bug in Opera and IE. It will be fixed in the nearest future
 
 ## Future plans
 
-1. Fix multiline bug in Opera;
+1. Fix multiline bugs in Opera;
 2. Fix multiline bugs in IE;
 3. Test in many versions of various browsers (FF 3.6+, Opera 9.5+, IE6+, Safari 3+, Chrome);
 4. Make jQuery version;
