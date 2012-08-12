@@ -23,7 +23,7 @@ Ranger extends inputs and textareas with these methods:
 - __insertAtCursor(text)__ — inserts __text__ at cursor position. Returns input.
 - __wrapCursor(leftPart, rightPart)__ — wraps cursor with two parts of text. Returns input.
 - __select(from, to)__ — selects text in input. __No arguments__ — selects all, __two arguments__ — selects range. Supports _negative_ arguments, for example: input.select(−1, −20) — will select from end of text to 20-th symbol before end. Returns input.
-- __deselect()__ — deselects text. After deselecting cursor stays at selection beginning position.
+- __deselect()__ — deselects text. After deselecting cursor stays at selection start position.
 - __getSelectedText()__ — returns selected text.
 - __replaceSelectedText(text)__ — replaces selected text with __text__ argument. Returns input.
 - __wrapSelectedText(leftPart, rightPart)__ — wraps selected text with two parts of text. Returns input.
