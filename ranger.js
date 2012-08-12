@@ -332,7 +332,7 @@ var Ranger = (function() {
 		//
 		// (void) → this
 		deselect: function() {
-			this.ranger().deselect();
+			//this.ranger().deselect();
 			return this;
 		},
 
