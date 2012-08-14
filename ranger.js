@@ -147,8 +147,10 @@ var Ranger = (function() {
 			savedRange.moveStart("character", - textBookmark.length);
 			savedRange.select();
 			savedRange.text = rangeText;
-			savedRange.moveStart("character", - rangeText.length);
+			savedRange.moveStart("character", - rangeText.length + rangeText.countOf("\n"));
 			savedRange.select();
+			/*
+			*/
 
 			return position;
 		};
