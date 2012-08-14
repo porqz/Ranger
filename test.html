@@ -16,34 +16,47 @@
 				font: normal 12px/1.6em Arial, sans-serif;
 				padding: 20px;
 			}
-				.page__subheader,
-				.page__header {
-					font: normal 2em/1.4em Georgia, sans-serif;
-					font-style: italic;
-					margin: 0 0 20px 0;
+				.page__test-section {
+					width: 350px;
 				}
+					.page__subheader,
+					.page__header {
+						font: normal 2em/1.4em Georgia, sans-serif;
+						font-style: italic;
+						margin: 0 0 20px 0;
+					}
 
-				.page__subheader {
-					font-size: 1.5em
-				}
+					.page__subheader {
+						font-size: 1.5em
+					}
 
-				.ranger__test-input,
-				.ranger__test-textarea {
-					text-align: left;
-					float: left;
-					clear: both;
-					margin: 0 0 5px 0;
-				}
+					.ranger__test-input,
+					.ranger__test-textarea {
+						text-align: left;
+						margin: 0 0 10px 0;
+					}
 
-				.ranger__test-input {}
+					.ranger__test-input {}
+
+					.page__test-section p {
+						margin: 10px 0 10px;
+					}
 		</style>
 	</head>
 	<body class="page">
-		<h1 class="page__header">Ranger Test Page</h1>
-		<p>
-			Ranger is wrapper around Range and TextRange objects.
-		</p>
-		<input id="tested-input" class="input-text ranger__test-input" name="test[]" type="text" tabindex="1" />
-		<textarea id="tested-textarea" name="test[]" rows="8" cols="40" class="textarea ranger__test-textarea" tabindex="2"></textarea>
+		<div class="page__test-section">
+			<h1 class="page__header">Ranger Test Page</h1>
+			<p>
+				Ranger is wrapper around Range and TextRange objects.
+			</p>
+			<input id="tested-input" class="input-text ranger__test-input" name="test[]" type="text" tabindex="1" />
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+			</p>
+			<textarea id="tested-textarea" name="test[]" rows="8" cols="40" class="textarea ranger__test-textarea" tabindex="2"></textarea>
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+			</p>
+		</div>
 	</body>
 </html>	
