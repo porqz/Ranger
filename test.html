@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="author" content="porqz" />
+
+		<title>Ranger Test Page</title>
+
+		<script src="./ranger.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./ranger.test.js" type="text/javascript" charset="utf-8"></script>
+
+		<style type="text/css">
+			.page {
+				font: normal 12px/1.6em Arial, sans-serif;
+				padding: 20px;
+			}
+				.page__subheader,
+				.page__header {
+					font: normal 2em/1.4em Georgia, sans-serif;
+					font-style: italic;
+					margin: 0 0 20px 0;
+				}
+
+				.page__subheader {
+					font-size: 1.5em
+				}
+
+				.ranger__test-input,
+				.ranger__test-textarea {
+					text-align: left;
+					float: left;
+					clear: both;
+					margin: 0 0 5px 0;
+				}
+
+				.ranger__test-input {}
+		</style>
+	</head>
+	<body class="page">
+		<h1 class="page__header">Ranger Test Page</h1>
+		<p>
+			Ranger is wrapper around Range and TextRange objects.
+		</p>
+		<input id="tested-input" class="input-text ranger__test-input" name="test[]" type="text" tabindex="1" />
+		<textarea id="tested-textarea" name="test[]" rows="8" cols="40" class="textarea ranger__test-textarea" tabindex="2"></textarea>
+	</body>
+</html>	

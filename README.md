@@ -61,7 +61,6 @@ There is a multiline bug in Opera. It will be fixed in the nearest future too.
 ## Future plans
 
 1. Fix multiline bugs in Opera;
-3. Test in different versions of major browsers (FF 3.6+, Opera 9.5+, IE6+, Safari 3+, Chrome);
-4. Make jQuery version;
-5. Make and publish test page;
-6. Make Russian version of the README.
+2. Test in different versions of major browsers (FF 3.6+, Opera 9.5+, IE6+, Safari 3+, Chrome);
+3. Make jQuery version;
+4. Make Russian version of the README.
