@@ -30,6 +30,25 @@ Ranger extends inputs and textareas with these methods:
 
 As you can see, many methods return input instance, so you can use chainable calls!
 
+## Example
+
+Ok, script is included. Let’s try Ranger:
+
+```javascript
+var input = document.getElementById("#test-input"); // some <input type="text" id="test-input" />
+
+input.value = "Test";
+input
+	.setCursorPosition(2) // Te|st
+	.setCursorPosition(-1) // Test|
+	.setCursorPosition(-4) // T|est
+	.insertAtCursor("he t") // The t|est
+	.select(1, 3); // T[he] test
+	.select(-1, -2); // The tes[t]
+
+// Etc.
+```
+
 ## Supported browsers
 
 Ranger was tested in the latest Chrome and IE 8 (_should_ works in 6 and 7!). In the nearest future it will be tested in older IEs and other browsers.
