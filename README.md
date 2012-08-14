@@ -43,10 +43,11 @@ input
 	.setCursorPosition(-1) // Test|
 	.setCursorPosition(-4) // T|est
 	.insertAtCursor("he t") // The t|est
-	.select(1, 3); // T[he] test
-	.select(-1, -2); // The tes[t]
+	.select(1, 3) // T[he] test
+	.select(-1, -5) // The [test]
+	.getSelectedText(); // "test"
 
-// Etc.
+// Etc...
 ```
 
 ## Supported browsers
