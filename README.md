@@ -50,6 +50,8 @@ input
 // Etc...
 ```
 
+See [ranger.test.js](https://github.com/porqz/Ranger/blob/master/ranger.test.js) file for more examples.
+
 ## Supported browsers
 
 Ranger was tested in the latest Chrome and IE 8 (_should_ works in 6 and 7!). In the nearest future it will be tested in older IEs and other browsers.
