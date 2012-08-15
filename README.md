@@ -50,7 +50,7 @@ input
 // Etc...
 ```
 
-See [ranger.test.js](https://github.com/porqz/Ranger/blob/master/ranger.test.js) file for more examples.
+See [test.js](https://github.com/porqz/Ranger/blob/master/test.js) file for more examples.
 
 ## Supported browsers
 
