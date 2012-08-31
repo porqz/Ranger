@@ -63,13 +63,13 @@ window.onload = function() {
 		.insertAtCursor("Not ")  // To be bee or not to be bee? Not |To be bee.
 		.select(-10, -11) // To be bee or not to be bee? Not [t]o be bee.
 		.replaceSelectedText("t") // To be bee or not to be bee? Not t|o be bee.
-		.select() // [To be bee or not to be bee? Not t|o be bee.]
-		.wrapSelectedText("«", "»") // «To be bee or not to be bee? Not t|o be bee.»|
-		.select(-2, -3) // «To be bee or not to be bee? Not t|o be bee[.]»
-		.replaceSelectedText("") // «To be bee or not to be bee? Not t|o be bee|»
-		.setCursorPosition(-1) // «To be bee or not to be bee? Not t|o be bee»|
-		.insertAtCursor(".") // «To be bee or not to be bee? Not t|o be bee».|
-		.setCursorPosition(13) // «To be bee or| not to be bee? Not t|o be bee».
-		.wrapCursor("..", ".") // «To be bee or..|. not to be bee? Not t|o be bee».
+		.select() // [To be bee or not to be bee? Not to be bee.]
+		.wrapSelectedText("«", "»") // «To be bee or not to be bee? Not to be bee.»|
+		.select(-2, -3) // «To be bee or not to be bee? Not to be bee[.]»
+		.replaceSelectedText("") // «To be bee or not to be bee? Not to be bee|»
+		.setCursorPosition(-1) // «To be bee or not to be bee? Not to be bee»|
+		.insertAtCursor(".") // «To be bee or not to be bee? Not to be bee».|
+		.setCursorPosition(13) // «To be bee or| not to be bee? Not to be bee».
+		.wrapCursor("..", ".") // «To be bee or..|. not to be bee? Not to be bee».
 	//*/
 };
