@@ -5,6 +5,41 @@ var Ranger = (function() {
 		return this.split(text).length - 1;
 	};
 
+	// Calculates \r\n in string (this). Parametres 'from' and 'to' are optional, 
+	// ATTENTION: they ignores \r\n!
+	String.prototype.countOfRN = String.prototype.countOfRN || function(from, to) {
+		var count = 0;
+
+		if (typeof from != "undefined" && typeof to != "undefined") {
+			for (var i = 0; i < from; i++) { // from - 1 ?
+				if (this.charAt(i) + this.charAt(i + 1) == "\r\n") {
+					from = from + 1;
+				}
+			};
+
+			for (var i = 0; i < to; i++) { // to - 1 ?
+				if (this.charAt(i) + this.charAt(i + 1) == "\r\n") {
+					to = to + 1;
+				}
+			};
+
+			for (var i = from; i < to - 1; i++) {
+				if (this.charAt(i) + this.charAt(i + 1) == "\r\n") {
+					count = count + 1;
+				}
+			};
+		}
+		else {
+			for (var i = 0; i < this.length - 1; i++) {
+				if (this.charAt(i) + this.charAt(i + 1) == "\r\n") {
+					count = count + 1;
+				}
+			};
+		}
+
+		return count;
+	};
+
 	// Well, here it is.
 	var Ranger = function Ranger(input) {
 		if (typeof input != "undefined") {
@@ -229,6 +264,13 @@ var Ranger = (function() {
 		};
 	}
 	else {
+		//
+		//
+		//
+		//
+		//
+		//
+		//
 		// Here is the same part, but for modern browsers
 		if ("getSelection" in window) {
 			Ranger.prototype.getCursorPosition = function(inversed) {
@@ -236,10 +278,13 @@ var Ranger = (function() {
 
 				if (this.input.selectionStart || this.input.selectionStart == "0") {
 					if (inversed) {
-						return -this.input.value.length + this.input.selectionStart - 1;
+						return (
+									- this.input.value.length + this.input.value.countOf("\r\n")
+									- this.input.value.substring(0, this.input.selectionStart + 1).countOf("\r\n") + this.input.selectionStart
+									- 1);
 					}
 					else {
-						return this.input.selectionStart;
+						return this.input.selectionStart - this.input.value.substring(0, this.input.selectionStart + 1).countOf("\r\n");
 					}
 				}
 			};
@@ -247,24 +292,28 @@ var Ranger = (function() {
 
 		if ("setSelectionRange" in experimentalInput) {
 			Ranger.prototype.setCursorPosition = function(position) {
+				var position = position || 0;
+
 				if (position < 0) {
-					var position = this.input.value.length + position + 1;
+					position = this.input.value.length + position + 1; //- this.input.value.countOfRN(0, this.input.value.length + position + 1);
+				}
+				else {
+					position = position + this.input.value.countOfRN(0, position);
 				}
 
 				this.input.setSelectionRange(position, position);
 			};
 
 			Ranger.prototype.select = function(from, to) {
-				var valueLength = this.input.value.length;
+				var valueLength = this.input.value.replace(/\r\n/g, "\n").length,
 
-				if (from < 0) {
-					var from = valueLength + from + 1;
-				}
-				if (to < 0) {
-					var to = valueLength + to + 1;
-				}
+					from = (from < 0 ? valueLength + from + 1 : from),
+					to = (to < 0 ? valueLength + to + 1 : to);
 
-				this.input.setSelectionRange(Math.min(from, to), Math.max(from, to));
+				var resultFrom = Math.min(from, to),
+					resultTo = Math.max(from, to);
+
+				this.input.setSelectionRange(resultFrom + this.input.value.countOfRN(0, resultFrom), resultTo  + this.input.value.countOfRN(0, resultTo));
 			};
 		}
 
@@ -273,8 +322,8 @@ var Ranger = (function() {
 					inputValue = this.input.value;
 
 			this.input.value = 
-				inputValue.substr(0, cursorPosition) + text + 
-				inputValue.substr(cursorPosition, inputValue.length);
+				inputValue.substr(0, cursorPosition + inputValue.countOfRN(0, cursorPosition)) + text + 
+				inputValue.substr(cursorPosition + inputValue.countOfRN(0, cursorPosition), inputValue.length);
 
 			this.setCursorPosition(cursorPosition + text.length);
 		};
@@ -284,8 +333,8 @@ var Ranger = (function() {
 				cursorPosition = this.getCursorPosition();
 
 			this.input.value = 
-				inputValue.substr(0, cursorPosition) + text + 
-				inputValue.substr(cursorPosition + this.getSelectedText().length, inputValue.length);
+				inputValue.substr(0, cursorPosition + inputValue.countOfRN(0, cursorPosition)) + text + 
+				inputValue.substr(cursorPosition + this.getSelectedText().length + inputValue.countOfRN(0, cursorPosition + this.getSelectedText().length), inputValue.length);
 
 			this.setCursorPosition(cursorPosition + text.length);
 		};
