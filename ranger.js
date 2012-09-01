@@ -1,43 +1,46 @@
 // Ranger is object-wrapper around Range, Selection, TextRange
 
 var Ranger = (function() {
-	String.prototype.countOf = String.prototype.countOf || function(text) {
-		return this.split(text).length - 1;
-	};
+	var utils = {
+		// Calculates count of what in text
+		countOf: function(text, what) {
+			return text.split(what).length - 1;
+		},
 
-	// Calculates \r\n in string (this). Parametres 'from' and 'to' are optional, 
-	// ATTENTION: they ignores \r\n!
-	String.prototype.countOfRN = String.prototype.countOfRN || function(from, to) {
-		var count = 0;
+		// Calculates \r\n in string (this). Parametres 'from' and 'to' are optional, 
+		// ATTENTION: they ignores \r\n!
+		countOfRN: function(text, from, to) {
+			var count = 0;
 
-		if (typeof from != "undefined" && typeof to != "undefined") {
-			for (var i = 0; i < from; i++) { // from - 1 ?
-				if (this.charAt(i) + this.charAt(i + 1) == "\r\n") {
-					from = from + 1;
-				}
-			};
+			if (typeof from != "undefined" && typeof to != "undefined") {
+				for (var i = 0; i < from; i++) { // from - 1 ?
+					if (text.charAt(i) + text.charAt(i + 1) == "\r\n") {
+						from = from + 1;
+					}
+				};
 
-			for (var i = 0; i < to; i++) { // to - 1 ?
-				if (this.charAt(i) + this.charAt(i + 1) == "\r\n") {
-					to = to + 1;
-				}
-			};
+				for (var i = 0; i < to; i++) { // to - 1 ?
+					if (text.charAt(i) + text.charAt(i + 1) == "\r\n") {
+						to = to + 1;
+					}
+				};
 
-			for (var i = from; i < to - 1; i++) {
-				if (this.charAt(i) + this.charAt(i + 1) == "\r\n") {
-					count = count + 1;
-				}
-			};
+				for (var i = from; i < to - 1; i++) {
+					if (text.charAt(i) + text.charAt(i + 1) == "\r\n") {
+						count = count + 1;
+					}
+				};
+			}
+			else {
+				for (var i = 0; i < this.length - 1; i++) {
+					if (text.charAt(i) + text.charAt(i + 1) == "\r\n") {
+						count = count + 1;
+					}
+				};
+			}
+
+			return count;
 		}
-		else {
-			for (var i = 0; i < this.length - 1; i++) {
-				if (this.charAt(i) + this.charAt(i + 1) == "\r\n") {
-					count = count + 1;
-				}
-			};
-		}
-
-		return count;
 	};
 
 	// Well, here it is.
@@ -144,10 +147,10 @@ var Ranger = (function() {
 			var textBookmarkPosition = this.input.value.indexOf(textBookmark);
 
 			if (inversed) {
-				position = - inputValue.length + textBookmarkPosition - 1 + inputValue.substring(textBookmarkPosition, inputValue.length - 1).countOf("\n");
+				position = - inputValue.length + textBookmarkPosition - 1 + utils.countOf(inputValue.substring(textBookmarkPosition, inputValue.length - 1), "\n");
 			}
 			else {
-				position = textBookmarkPosition - this.input.value.substring(0, textBookmarkPosition).countOf("\n");
+				position = textBookmarkPosition - utils.countOf(this.input.value.substring(0, textBookmarkPosition), "\n");
 			}
 
 			savedRange.moveStart("character", - textBookmark.length);
@@ -182,7 +185,7 @@ var Ranger = (function() {
 			savedRange.moveStart("character", - textBookmark.length);
 			savedRange.select();
 			savedRange.text = rangeText;
-			savedRange.moveStart("character", - rangeText.length + rangeText.countOf("\n"));
+			savedRange.moveStart("character", - rangeText.length + utils.countOf(rangeText, "\n"));
 			savedRange.select();
 			/*
 			*/
@@ -222,7 +225,7 @@ var Ranger = (function() {
 
 		Ranger.prototype.select = function(startPosition, endPosition) {
 			var range = this.input.createTextRange(),
-				valueLength = this.input.value.length - this.input.value.countOf("\n");
+				valueLength = this.input.value.length - utils.countOf(this.input.value, "\n");
 
 			// Reset cursor to zero position
 			range.expand("textedit");
@@ -279,12 +282,12 @@ var Ranger = (function() {
 				if (this.input.selectionStart || this.input.selectionStart == "0") {
 					if (inversed) {
 						return (
-									- this.input.value.length + this.input.value.countOf("\r\n")
-									- this.input.value.substring(0, this.input.selectionStart + 1).countOf("\r\n") + this.input.selectionStart
+									- this.input.value.length + utils.countOf(this.input.value, "\r\n")
+									- utils.countOf(this.input.value.substring(0, this.input.selectionStart + 1), "\r\n") + this.input.selectionStart
 									- 1);
 					}
 					else {
-						return this.input.selectionStart - this.input.value.substring(0, this.input.selectionStart + 1).countOf("\r\n");
+						return this.input.selectionStart - utils.countOf(this.input.value.substring(0, this.input.selectionStart + 1), "\r\n");
 					}
 				}
 			};
@@ -295,10 +298,10 @@ var Ranger = (function() {
 				var position = position || 0;
 
 				if (position < 0) {
-					position = this.input.value.length + position + 1; //- this.input.value.countOfRN(0, this.input.value.length + position + 1);
+					position = this.input.value.length + position + 1;
 				}
 				else {
-					position = position + this.input.value.countOfRN(0, position);
+					position = position + utils.countOfRN(this.input.value, 0, position);
 				}
 
 				this.input.setSelectionRange(position, position);
@@ -313,7 +316,7 @@ var Ranger = (function() {
 				var resultFrom = Math.min(from, to),
 					resultTo = Math.max(from, to);
 
-				this.input.setSelectionRange(resultFrom + this.input.value.countOfRN(0, resultFrom), resultTo  + this.input.value.countOfRN(0, resultTo));
+				this.input.setSelectionRange(resultFrom + utils.countOfRN(this.input.value, 0, resultFrom), resultTo  + utils.countOfRN(this.input.value, 0, resultTo));
 			};
 		}
 
@@ -322,8 +325,8 @@ var Ranger = (function() {
 					inputValue = this.input.value;
 
 			this.input.value = 
-				inputValue.substr(0, cursorPosition + inputValue.countOfRN(0, cursorPosition)) + text + 
-				inputValue.substr(cursorPosition + inputValue.countOfRN(0, cursorPosition), inputValue.length);
+				inputValue.substr(0, cursorPosition + utils.countOfRN(inputValue, 0, cursorPosition)) + text + 
+				inputValue.substr(cursorPosition + utils.countOfRN(inputValue, 0, cursorPosition), inputValue.length);
 
 			this.setCursorPosition(cursorPosition + text.length);
 		};
@@ -333,8 +336,8 @@ var Ranger = (function() {
 				cursorPosition = this.getCursorPosition();
 
 			this.input.value = 
-				inputValue.substr(0, cursorPosition + inputValue.countOfRN(0, cursorPosition)) + text + 
-				inputValue.substr(cursorPosition + this.getSelectedText().length + inputValue.countOfRN(0, cursorPosition + this.getSelectedText().length), inputValue.length);
+				inputValue.substr(0, cursorPosition + utils.countOfRN(inputValue, 0, cursorPosition)) + text + 
+				inputValue.substr(cursorPosition + this.getSelectedText().length + utils.countOfRN(inputValue, 0, cursorPosition + this.getSelectedText().length), inputValue.length);
 
 			this.setCursorPosition(cursorPosition + text.length);
 		};
