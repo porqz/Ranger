@@ -1,6 +1,6 @@
 # Ranger
 
-Ranger is _cross-browser_ jQuery pligin, which provides methods for _easy_ working with cursor (caret) and selections.
+Ranger is _cross-browser_ jQuery plugin, which provides methods for _easy_ working with cursor (caret) and selections.
 
 ## Usage
 
