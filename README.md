@@ -7,7 +7,7 @@ Ranger is _cross-browser_ jQuery plugin, which provides methods for _easy_ worki
 Just download and include it in your page:
 
 ```html
-<script src="./jquery.ranger.js" type="text/javascript" charset="utf-8"></script>
+<script src="./jquery.ranger.min.js" type="text/javascript" charset="utf-8"></script>
 ```
 
 After that all your jQuery-wrapped inputs and textareas will have new methods. Really simple, isn’t it?
