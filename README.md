@@ -35,7 +35,7 @@ As you can see, many methods return input instance, so you can use chainable cal
 Ok, script is included. Let’s try Ranger:
 
 ```javascript
-var input = document.getElementById("#test-input"); // some <input type="text" id="test-input" />
+var input = document.getElementById("#test-input"); // Some <input type="text" id="test-input" />
 
 input.value = "Test";
 input
