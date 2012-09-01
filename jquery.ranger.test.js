@@ -3,6 +3,14 @@ $(document).ready(function() {
 		clear();
 	}
 	
+	if (typeof console == "undefined") {
+		console = {
+			log: function() {
+				alert(Array.prototype.join.apply(arguments, [" "]));
+			}
+		}
+	}
+
 	if (typeof console != "undefined" && "clear" in console) {
 		console.clear();
 	}
