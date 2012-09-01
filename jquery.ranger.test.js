@@ -1,10 +1,10 @@
-window.onload = function() {
-	if (typeof clear != "undefined")
+$(document).ready(function() {
+	if (typeof clear != "undefined" && typeof clear == "function") {
 		clear();
-	else {
-		if ("clear" in console) {
-			console.clear();
-		}
+	}
+	
+	if (typeof console != "undefined" && "clear" in console) {
+		console.clear();
 	}
 
 	// Input tests
@@ -21,13 +21,12 @@ window.onload = function() {
 	console.log("testedInput.getCursorPosition(): " + testedInput.getCursorPosition() + " (" + (testedInput.getCursorPosition() == 2) + ")");
 	console.log("testedInput.getCursorPosition(true): " + testedInput.getCursorPosition(true) + " (" + (testedInput.getCursorPosition(true) == -3) + ")");
 
-	
-	//*/
 	// Textarea tests
 	var testedTextarea = $("#tested-textarea");
 
 	testedTextarea
 		.val("To be\nor\nnot to\nbe?")
+
 		.select() // [To be or not to be?]
 		.select(0, 2) // [To] be or not to be?
 		.deselect() // |To be or not to be?
@@ -42,6 +41,7 @@ window.onload = function() {
 
 	testedTextarea
 		.insertAtCursor("\nTo be.") // To be or not to be? To be.|
+
 		.select(3, 5) // To [be] or not to be? To be.
 		.replaceSelectedText("be bee")  // To be bee| or not to be? To be.
 		.select(20, 22) // To be bee or not to [be]? To be.
@@ -71,4 +71,4 @@ window.onload = function() {
 		.setCursorPosition(13) // «To be bee or| not to be bee? Not to be bee».
 		.wrapCursor("..", ".") // «To be bee or..|. not to be bee? Not to be bee».
 	//*/
-};
+});
