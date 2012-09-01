@@ -407,19 +407,19 @@ var Ranger = (function() {
 		// (Number) → this
 		setCursorPosition: function(position) {
 			this.focus();
-			this.ranger().setCursorPosition(position);
+			this.ranger().setCursorPosition(position || 0);
 			return this;
 		},
 		//
 		// (String) → this
 		insertAtCursor: function(text) {
-			this.ranger().insertAtCursor(text);
+			this.ranger().insertAtCursor(text || "");
 			return this;
 		},
 		//
 		// (String, String) → this
 		wrapCursor: function(leftPart, rightPart) {
-			this.ranger().wrapCursor(leftPart, rightPart);
+			this.ranger().wrapCursor(leftPart || "", rightPart || "");
 			return this;
 		},
 
@@ -447,13 +447,13 @@ var Ranger = (function() {
 		//
 		// (String) → this
 		replaceSelectedText: function(text) {
-			this.ranger().replaceSelectedText(text);
+			this.ranger().replaceSelectedText(text || "");
 			return this;
 		},
 		//
 		// (String, String) → this
 		wrapSelectedText: function(leftPart, rightPart) {
-			this.ranger().wrapSelectedText(leftPart, rightPart);
+			this.ranger().wrapSelectedText(leftPart || "", rightPart || "");
 			return this;
 		}
 
