@@ -52,9 +52,10 @@ See [jquery.ranger.test.js](https://github.com/porqz/Ranger/blob/master/jquery.r
 
 ## Supported browsers
 
-Ranger was tested in the latest Chrome, the latest Opera and IE 8. In the nearest future it will be tested in older IEs and other browsers.
+Ranger was tested in the latest Chrome, the latest Opera and IE 7+.
 
 ## Future plans
 
-1. Test in different versions of major browsers (FF 3.6+, Opera 9.5+, IE6+, Safari 3+, Chrome);
+1. Make working version for IE 6;
+2. Test in different versions of major browsers (FF 3.6+, Opera 9.5+, Safari 3+, Chrome);
 3. Make Russian version of the README.
