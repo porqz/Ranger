@@ -373,15 +373,17 @@ var Ranger = (function() {
 // Extension part
 
 (function(Ranger) {
-	// Simple extending method
-	Object.prototype.extendWith = Object.prototype.extendWith || function(object) {
-		for (var propertyName in object) {
-			if (object.hasOwnProperty(propertyName)) {
-				this[propertyName] = object[propertyName];
+	var utils = {
+		// Simple extending method
+		extend: function(object, withObject) {
+			for (var propertyName in withObject) {
+				if (withObject.hasOwnProperty(propertyName)) {
+					object[propertyName] = withObject[propertyName];
+				}
 			}
-		}
 
-		return this;
+			return object;
+		}
 	};
 
 	var Rangeble = {
@@ -456,8 +458,7 @@ var Ranger = (function() {
 		// so, you can make chained methods calls!
 	};
 
-
-	Object.prototype.extendWith.apply(HTMLTextAreaElement.prototype, [Rangeble]);
-	Object.prototype.extendWith.apply(HTMLInputElement.prototype, [Rangeble]);
+	utils.extend(HTMLTextAreaElement.prototype, Rangeble);
+	utils.extend(HTMLInputElement.prototype, Rangeble);
 
 })(Ranger);
