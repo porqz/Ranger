@@ -1,18 +1,16 @@
 # Ranger
 
-Ranger is _cross-browser_ input and textarea objects extension, which provides methods for _easy_ working with cursor (caret) and selections.
-
-Ranger initializes once, when you call its method first time.
+Ranger is _cross-browser_ jQuery pligin, which provides methods for _easy_ working with cursor (caret) and selections.
 
 ## Usage
 
 Just download and include it in your page:
 
 ```html
-<script src="./js/ranger.js" type="text/javascript" charset="utf-8"></script>
+<script src="./jquery.ranger.js" type="text/javascript" charset="utf-8"></script>
 ```
 
-After that all your inputs and textareas will have new methods. Really simple, isn’t it?
+After that all your jQuery-wrapped inputs and textareas will have new methods. Really simple, isn’t it?
 
 ## Methods
 
@@ -35,10 +33,10 @@ As you can see, many methods return input instance, so you can use chainable cal
 Ok, script is included. Let’s try Ranger:
 
 ```javascript
-var input = document.getElementById("#test-input"); // Some <input type="text" id="test-input" />
+var input = $("#test-input"); // Some <input type="text" id="test-input" />
 
-input.value = "Test";
 input
+	.val("Test")
 	.setCursorPosition(2) // Te|st
 	.setCursorPosition(-1) // Test|
 	.setCursorPosition(-4) // T|est
@@ -47,10 +45,10 @@ input
 	.select(-1, -5) // The [test]
 	.getSelectedText(); // "test"
 
-// Etc...
+// Etc.
 ```
 
-See [test.js](https://github.com/porqz/Ranger/blob/master/test.js) file for more examples.
+See [jquery.ranger.test.js](https://github.com/porqz/Ranger/blob/master/jquery.ranger.test.js) file for more examples.
 
 ## Supported browsers
 
@@ -59,5 +57,4 @@ Ranger was tested in the latest Chrome, the latest Opera and IE 8 (native versio
 ## Future plans
 
 1. Test in different versions of major browsers (FF 3.6+, Opera 9.5+, IE6+, Safari 3+, Chrome);
-2. Make jQuery version;
 3. Make Russian version of the README.
