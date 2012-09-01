@@ -68,5 +68,4 @@ $(document).ready(function() {
 		.insertAtCursor(".") // «To be bee or not to be bee? Not to be bee».|
 		.setCursorPosition(13) // «To be bee or| not to be bee? Not to be bee».
 		.wrapCursor("..", ".") // «To be bee or..|. not to be bee? Not to be bee».
-	//*/
 });
