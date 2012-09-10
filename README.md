@@ -17,16 +17,16 @@ After that all your jQuery-wrapped inputs and textareas will have new methods. R
 Ranger extends inputs and textareas with these methods:
 
 - __getCursorPosition(inversed)__ — returns position of cursor. __Inversed__ argument is optional, if is __true__ — method returns position from the end of the text.
-- __setCursorPosition(position)__ — sets position of cursor. If __position__ argument is _negative_, cursor position will be calculated from the end of the text. Returns input.
-- __insertAtCursor(text)__ — inserts __text__ at cursor position. Returns input.
-- __wrapCursor(leftPart, rightPart)__ — wraps cursor with two parts of text. Returns input.
-- __select(from, to)__ — selects text in input. __No arguments__ — selects all, __two arguments__ — selects range. Supports _negative_ arguments, for example: input.select(−1, −20) — will select text from the last symbol back to the 20th symbol from the end. Returns input.
+- __setCursorPosition(position)__ — sets position of cursor. If __position__ argument is _negative_, cursor position will be calculated from the end of the text. Returns jQuery object.
+- __insertAtCursor(text)__ — inserts __text__ at cursor position. Returns jQuery object.
+- __wrapCursor(leftPart, rightPart)__ — wraps cursor with two parts of text. Returns jQuery object.
+- __select(from, to)__ — selects text in input. __No arguments__ — selects all, __two arguments__ — selects range. Supports _negative_ arguments, for example: input.select(−1, −20) — will select text from the last symbol back to the 20th symbol from the end. Returns jQuery object.
 - __deselect()__ — deselects text. After deselecting cursor stays at selection start position.
 - __getSelectedText()__ — returns selected text.
-- __replaceSelectedText(text)__ — replaces selected text with __text__ argument. Returns input.
-- __wrapSelectedText(leftPart, rightPart)__ — wraps selected text with two parts of text. Returns input.
+- __replaceSelectedText(text)__ — replaces selected text with __text__ argument. Returns jQuery object.
+- __wrapSelectedText(leftPart, rightPart)__ — wraps selected text with two parts of text. Returns jQuery object.
 
-As you can see, many methods return input instance, so you can use chainable calls!
+As you can see, many methods return jQuery instance, so you can use chainable calls!
 
 ## Example
 
