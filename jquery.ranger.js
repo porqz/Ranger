@@ -107,7 +107,7 @@
 
 					this.input.attachEvent("onfocus", function () {
 						_this.isFocused = true;
-						_this.savedRange();
+						_this.saveRange();
 					}, false);
 
 					this.input.attachEvent("onblur", function () { _this.isFocused = false; }, false);
