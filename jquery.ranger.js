@@ -105,7 +105,11 @@
 					this.input.attachEvent("onkeydown", saveRange, false);
 					this.input.attachEvent("onselect", saveRange, false);
 
-					this.input.attachEvent("onfocus", function () { _this.isFocused = true; }, false);
+					this.input.attachEvent("onfocus", function () {
+						_this.isFocused = true;
+						_this.savedRange();
+					}, false);
+
 					this.input.attachEvent("onblur", function () { _this.isFocused = false; }, false);
 				},
 
