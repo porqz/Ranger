@@ -1,40 +1,41 @@
-(function($) {
+(function ($) {
 
 	// Ranger is object-wrapper around Range, Selection, TextRange
 
-	var Ranger = (function() {
+	var Ranger = (function () {
 		var utils = {
 			// Calculates count of what in text
-			countOf: function(text, what) {
+			countOf: function (text, what) {
 				return text.split(what).length - 1;
 			},
 
 			// Calculates \r\n in string (this). Parametres 'from' and 'to' are optional, 
 			// ATTENTION: they ignores \r\n!
-			countOfRN: function(text, from, to) {
-				var count = 0;
+			countOfRN: function (text, from, to) {
+				var count = 0,
+					i = 0;
 
 				if (typeof from != "undefined" && typeof to != "undefined") {
-					for (var i = 0; i < from; i++) { // from - 1 ?
+					for (i = 0; i < from; i++) { // from - 1 ?
 						if (text.charAt(i) + text.charAt(i + 1) == "\r\n") {
 							from = from + 1;
 						}
 					};
 
-					for (var i = 0; i < to; i++) { // to - 1 ?
+					for (i = 0; i < to; i++) { // to - 1 ?
 						if (text.charAt(i) + text.charAt(i + 1) == "\r\n") {
 							to = to + 1;
 						}
 					};
 
-					for (var i = from; i < to - 1; i++) {
+					for (i = from; i < to - 1; i++) {
 						if (text.charAt(i) + text.charAt(i + 1) == "\r\n") {
 							count = count + 1;
 						}
 					};
 				}
 				else {
-					for (var i = 0; i < this.length - 1; i++) {
+					for (i = 0; i < this.length - 1; i++) {
 						if (text.charAt(i) + text.charAt(i + 1) == "\r\n") {
 							count = count + 1;
 						}
@@ -51,7 +52,7 @@
 				this.input = input;
 			}
 			else {
-				throw "Initialization error: Ranger must be initialized with some input element."
+				throw "Initialization error: Ranger must be initialized with some input element.";
 			}
 
 			"init" in this && this.init();
@@ -72,12 +73,12 @@
 			// Let me introduce you the RangeSaver object,
 			// which helps us to save and restore cursor position
 			// ...in Internet Explorer
-			var RangeSaver = function(input) {
+			var RangeSaver = function (input) {
 				if (typeof input != "undefined") {
 					this.input = input;
 				}
 				else {
-					throw "Initialization error: RangeSaver must init with some input element."
+					throw "Initialization error: RangeSaver must init with some input element.";
 				}
 
 				this.isFocused = false;
@@ -90,13 +91,13 @@
 			RangeSaver.prototype = {
 				constructor: RangeSaver,
 
-				init: function() {
+				init: function () {
 					this.behavior();
 				},
 
-				behavior: function() {
+				behavior: function () {
 					var _this = this,
-						saveRange = function() { _this.saveRange(); }
+						saveRange = function () { _this.saveRange(); };
 
 					// Yes, we need to catch current range on every movement
 					this.input.attachEvent("onclick", saveRange, false);
@@ -104,24 +105,24 @@
 					this.input.attachEvent("onkeydown", saveRange, false);
 					this.input.attachEvent("onselect", saveRange, false);
 
-					this.input.attachEvent("onfocus", function() { _this.isFocused = true; }, false);
-					this.input.attachEvent("onblur", function() { _this.isFocused = false; }, false);
+					this.input.attachEvent("onfocus", function () { _this.isFocused = true; }, false);
+					this.input.attachEvent("onblur", function () { _this.isFocused = false; }, false);
 				},
 
-				saveRange: function() {
+				saveRange: function () {
 					if (this.isFocused) {
 						this.savedRange = document.selection.createRange();
 					}
 				},
 
-				getRange: function() {
+				getRange: function () {
 					return this.savedRange;
 				}
 			};
 			// RangeSaver is gone!
 
 			// And Ranger again
-			Ranger.prototype.init = function() {
+			Ranger.prototype.init = function () {
 				var activePageElement = document.activeElement,
 					range = this.input.createTextRange();
 
@@ -135,7 +136,7 @@
 			};
 
 
-			Ranger.prototype.getCursorPosition = function(inversed) {
+			Ranger.prototype.getCursorPosition = function (inversed) {
 				var inversed = inversed || false,
 					position = null,
 					
@@ -164,7 +165,7 @@
 				return position;
 			};
 
-			Ranger.prototype.__getCursorPosition = function(inversed) {
+			Ranger.prototype.__getCursorPosition = function (inversed) {
 				var inversed = inversed || false,
 					position = null,
 					
@@ -195,7 +196,7 @@
 				return position;
 			};
 
-			Ranger.prototype.setCursorPosition = function(position) {
+			Ranger.prototype.setCursorPosition = function (position) {
 				var range = this.input.createTextRange();
 
 				range.expand("textedit");
@@ -213,7 +214,7 @@
 				this.rangeSaver.saveRange();
 			};
 
-			Ranger.prototype.insertAtCursor = function(text) {
+			Ranger.prototype.insertAtCursor = function (text) {
 				var cursorPosition = this.getCursorPosition(),
 					__cursorPosition = this.__getCursorPosition(),
 						inputValue = this.input.value;
@@ -225,7 +226,7 @@
 				this.setCursorPosition(cursorPosition + text.length);
 			};
 
-			Ranger.prototype.select = function(startPosition, endPosition) {
+			Ranger.prototype.select = function (startPosition, endPosition) {
 				var range = this.input.createTextRange(),
 					valueLength = this.input.value.length - utils.countOf(this.input.value, "\n");
 
@@ -241,29 +242,32 @@
 					var startPosition = valueLength + startPosition + 1;
 				}
 
-				range.moveEnd("character", Math.max(startPosition, endPosition))
+				range.moveEnd("character", Math.max(startPosition, endPosition));
 				range.moveStart("character", Math.min(startPosition, endPosition));
 
 				range.select();
 				this.rangeSaver.saveRange();
 			};
 
-			Ranger.prototype.getSelectedText = function() {
+			Ranger.prototype.getSelectedText = function () {
 				var selection = document.selection,
 					selectionRange = selection.createRange();
 
 				if (selection.type.toLowerCase() == "text")
 					return selectionRange.text;
+
+				return "";
 			};
 
-			Ranger.prototype.replaceSelectedText = function(text) {
+			Ranger.prototype.replaceSelectedText = function (text) {
 				var inputValue = this.input.value,
-					__cursorPosition = this.__getCursorPosition();
+					selectedTextLength = this.getSelectedText().length,
+					__cursorPosition = this.__getCursorPosition(),
 					cursorPosition = this.getCursorPosition();
 
 				this.input.value = 
 					inputValue.substr(0, __cursorPosition) + text + 
-					inputValue.substr(__cursorPosition + this.getSelectedText().length, inputValue.length);
+					inputValue.substr(__cursorPosition + selectedTextLength, inputValue.length);
 
 				this.setCursorPosition(cursorPosition + text.length);
 			};
@@ -278,7 +282,7 @@
 			//
 			// Here is the same part, but for modern browsers
 			if ("getSelection" in window) {
-				Ranger.prototype.getCursorPosition = function(inversed) {
+				Ranger.prototype.getCursorPosition = function (inversed) {
 					var inversed = inversed || false;
 
 					if (this.input.selectionStart || this.input.selectionStart == "0") {
@@ -296,7 +300,7 @@
 			}
 
 			if ("setSelectionRange" in experimentalInput) {
-				Ranger.prototype.setCursorPosition = function(position) {
+				Ranger.prototype.setCursorPosition = function (position) {
 					var position = position || 0;
 
 					if (position < 0) {
@@ -309,7 +313,7 @@
 					this.input.setSelectionRange(position, position);
 				};
 
-				Ranger.prototype.select = function(from, to) {
+				Ranger.prototype.select = function (from, to) {
 					var valueLength = this.input.value.replace(/\r\n/g, "\n").length,
 
 						from = (from < 0 ? valueLength + from + 1 : from),
@@ -322,7 +326,7 @@
 				};
 			}
 
-			Ranger.prototype.insertAtCursor = function(text) {
+			Ranger.prototype.insertAtCursor = function (text) {
 				var cursorPosition = this.getCursorPosition(),
 						inputValue = this.input.value;
 
@@ -333,19 +337,20 @@
 				this.setCursorPosition(cursorPosition + text.length);
 			};
 
-			Ranger.prototype.replaceSelectedText = function(text) {
+			Ranger.prototype.replaceSelectedText = function (text) {
 				var inputValue = this.input.value,
-					cursorPosition = this.getCursorPosition();
+					cursorPosition = this.getCursorPosition(),
+					selectedTextLength = this.getSelectedText().length;
 
 				this.input.value = 
 					inputValue.substr(0, cursorPosition + utils.countOfRN(inputValue, 0, cursorPosition)) + text + 
-					inputValue.substr(cursorPosition + this.getSelectedText().length + utils.countOfRN(inputValue, 0, cursorPosition + this.getSelectedText().length), inputValue.length);
+					inputValue.substr(cursorPosition + selectedTextLength + utils.countOfRN(inputValue, 0, cursorPosition + selectedTextLength), inputValue.length);
 
 				this.setCursorPosition(cursorPosition + text.length);
 			};
 
 			if ("getSelection" in window) {
-				Ranger.prototype.getSelectedText = function() {
+				Ranger.prototype.getSelectedText = function () {
 					return this.input.value.substring(this.input.selectionStart, this.input.selectionEnd);
 				};
 			}
@@ -354,18 +359,18 @@
 
 		// Common part
 
-		Ranger.prototype.wrapCursor = function(leftPart, rightPart) {
+		Ranger.prototype.wrapCursor = function (leftPart, rightPart) {
 			var cursorPosition = this.getCursorPosition();
 
 			this.insertAtCursor(leftPart + rightPart);
 			this.setCursorPosition(cursorPosition + leftPart.length)
 		};
 
-		Ranger.prototype.deselect = function() {
+		Ranger.prototype.deselect = function () {
 			this.setCursorPosition(this.getCursorPosition());
 		};
 
-		Ranger.prototype.wrapSelectedText = function(leftPart, rightPart) {
+		Ranger.prototype.wrapSelectedText = function (leftPart, rightPart) {
 			this.replaceSelectedText(leftPart + this.getSelectedText() + rightPart)
 		};
 
@@ -374,10 +379,10 @@
 
 	})();
 
-	$.fn.ranger = function(callback) {
+	$.fn.ranger = function (callback) {
 		var rangerInstances = [];
 
-		this.each(function() {
+		this.each(function () {
 			var _this = $(this),
 				tagName = this.tagName.toLowerCase();
 
@@ -406,7 +411,7 @@
 	};
 
 	// ([Boolean]) → Number
-	$.fn.getCursorPosition = function(inversed) {
+	$.fn.getCursorPosition = function (inversed) {
 		var rangerInstances = this.ranger();
 
 		if (rangerInstances.length) {
@@ -432,8 +437,8 @@
 	};
 
 	// (Number) → this
-	$.fn.setCursorPosition = function(position) {
-		this.ranger(function() {
+	$.fn.setCursorPosition = function (position) {
+		this.ranger(function () {
 			this.input.focus();
 			this.setCursorPosition(position || 0);
 		});
@@ -442,8 +447,8 @@
 	};
 
 	// (String) → this
-	$.fn.insertAtCursor = function(text) {
-		this.ranger(function() {
+	$.fn.insertAtCursor = function (text) {
+		this.ranger(function () {
 			this.insertAtCursor(text || "");
 		});
 
@@ -451,8 +456,8 @@
 	};
 
 	// (String, String) → this
-	$.fn.wrapCursor = function(leftPart, rightPart) {
-		this.ranger(function() {
+	$.fn.wrapCursor = function (leftPart, rightPart) {
+		this.ranger(function () {
 			this.wrapCursor(leftPart || "", rightPart || "");
 		});
 
@@ -460,12 +465,12 @@
 	};
 
 	// ([Number, Number]) → this
-	$.fn.select = function(from, to) {
+	$.fn.select = function (from, to) {
 		// Select all if no argument comes
 		var from = (typeof from != "undefined" ? from : 0),
 			to = (typeof to != "undefined" ? to : -1);
 
-		this.ranger(function() {
+		this.ranger(function () {
 			this.input.focus();
 			this.select(from, to);
 		});
@@ -474,8 +479,8 @@
 	};
 
 	// (void) → this
-	$.fn.deselect = function() {
-		this.ranger(function() {
+	$.fn.deselect = function () {
+		this.ranger(function () {
 			this.deselect();
 		});
 
@@ -483,7 +488,7 @@
 	};
 
 	// (void) → String
-	$.fn.getSelectedText = function() {
+	$.fn.getSelectedText = function () {
 		var rangerInstances = this.ranger();
 
 		if (rangerInstances.length) {
@@ -499,7 +504,7 @@
 					if (rangerInstance != null) {
 						selectedTexts.push(rangerInstance.getSelectedText());
 					}
-				};
+				}
 
 				return selectedTexts;
 			}
@@ -509,8 +514,8 @@
 	};
 
 	// (String) → this
-	$.fn.replaceSelectedText = function(text) {
-		this.ranger(function() {
+	$.fn.replaceSelectedText = function (text) {
+		this.ranger(function () {
 			this.replaceSelectedText(text || "");
 		});
 
@@ -518,8 +523,8 @@
 	};
 
 	// (String, String) → this
-	$.fn.wrapSelectedText = function(leftPart, rightPart) {
-		this.ranger(function() {
+	$.fn.wrapSelectedText = function (leftPart, rightPart) {
+		this.ranger(function () {
 			this.wrapSelectedText(leftPart || "", rightPart || "");
 		});
 
