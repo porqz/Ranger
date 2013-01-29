@@ -56,6 +56,7 @@ Ranger was tested in the latest Chrome, the latest Opera and IE 7+.
 
 ## Future plans
 
-1. Make working version for IE 6;
-2. Test in different versions of major browsers (FF 3.6+, Opera 9.5+, Safari 3+, Chrome);
-3. Make Russian version of the README.
+1. _contentEditable_ support;
+2. Make working version for IE 6;
+3. Test in different versions of major browsers (FF 3.6+, Opera 9.5+, Safari 3+, Chrome);
+4. Make Russian version of the README.
